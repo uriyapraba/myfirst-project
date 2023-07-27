@@ -1,14 +1,14 @@
 pipeline
 {
-    options
+    /*options
     {
         skipDefaultCheckout()
-    }
+    }*/
     agent
     {
         node
         {
-            customWorkspace('first-maven-project')
+            customWorkspace('first-maven-project1')
             label 'slave2'
         }
     }
@@ -22,9 +22,9 @@ pipeline
         {
             steps
             {
-                checkout scmGit(branches: [[name: 'stable-2.289']],
+                checkout scmGit(branches: [[name: 'origin/master']],
                 userRemoteConfigs: [
-                    [ url: 'https://github.com/jenkinsci/jenkins.git' ]
+                    [ url: 'https://github.com/uriyapraba/myfirst-project.git' ]
                 ])
             }
             
@@ -33,7 +33,7 @@ pipeline
         {
             steps
             {
-                sh 'mvn -v'
+                sh 'mvn clean package'
             }
         }
     }
